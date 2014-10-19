@@ -1,25 +1,27 @@
 package main
 
 import (
-    "fmt"
-    "math"
+	"fmt"
+	"os"
 )
 
-type Vertex struct {
-    X, Y float64
+type Reader interface {
+	Read(b []byte) (n int, err error)
 }
 
-func (v *Vertex) Scale(f float64) {
-    v.X = v.X * f
-    v.Y = v.Y * f
+type Writer interface {
+	Write(b []byte) (n int, err error)
 }
 
-func (v Vertex) Abs() float64 {
-    return math.Sqrt(v.X * v.X + v.Y * v.Y)
+type ReadWriter interface {
+	Reader
+	Writer
 }
 
 func main() {
-    v := &Vertex{3, 4}
-    v.Scale(5)
-    fmt.Println(v, v.Abs())
+	var w Writer
+	w = os.Stdout
+	fmt.Fprintf(w, "Hello, writer\n")
 }
+
+
