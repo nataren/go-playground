@@ -2,10 +2,10 @@ package main
 
 import "fmt"
 
+var pow = []int { 1, 2, 4, 8, 16, 32, 64, 128 }
+
 func main() {
-	var z []int
-	fmt.Println(z, len(z), cap(z))
-	if z == nil {
-		fmt.Println("nil!")
+	for i, v := range pow {
+		fmt.Printf("2**%d = %d\n", i, v)
 	}
 }
