@@ -1,19 +1,17 @@
 package main
 
-import "code.google.com/p/go-tour/pic"
+import "fmt"
 
-func Pic(dx, dy int) [][]uint8 {
-	finalSlice := make([][]uint8, dy)
-	for i := range finalSlice {
-		innerSlice := make([]uint8, dx)
-		for j := range innerSlice {
-			innerSlice[j] = uint8(i) ^ uint8(j)
-		}
-		finalSlice[i] = innerSlice
-	}
-	return finalSlice
+type Vertex struct {
+	Lat, Long float64
 }
 
+var m map[string]Vertex
+
 func main() {
-    pic.Show(Pic)
+	m = make(map[string]Vertex)
+	m["Bell Labs"] = Vertex {
+		40.68433, -74.39967,
+	}
+	fmt.Println(m["Bell Labs"])
 }
