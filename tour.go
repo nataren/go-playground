@@ -1,12 +1,9 @@
 package main
 
-import (
-    "fmt"
-    "math/rand"
-    "time"
-)
+import "fmt"
+import "math"
 
 func main() {
-	rand.Seed(time.Now().Unix())
-	fmt.Println("My favorite number is", rand.Intn(10))
+	fmt.Printf("Now you have %g problems.",
+		math.Nextafter(2, 3))
 }
