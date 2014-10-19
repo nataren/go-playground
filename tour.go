@@ -2,21 +2,18 @@ package main
 
 import (
 	"fmt"
-	"runtime"
+	"math"
 )
 
+type Vertex struct {
+	X, Y float64
+}
+
+func (v *Vertex) Abs() float64 {
+	return math.Sqrt(v.X * v.X + v.Y * v.Y)
+}
+
 func main() {
-	fmt.Print("Go runs on ")
-
-	// Cases
-	switch os := runtime.GOOS; os {
-	case "darwin":
-		fmt.Println("OS X.")
-
-	case "linux":
-		fmt.Println("Linux.")
-
-	default:
-		fmt.Printf("%s.", "")
-	}
+	v := &Vertex { 3, 4 }
+	fmt.Println(v.Abs())
 }
