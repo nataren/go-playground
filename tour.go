@@ -1,13 +1,14 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
+
+const Pi = 3.14
 
 func main() {
-	var x, y int = 3, 4
-	var f float64 = math.Sqrt(float64(x * x + y * y))
-	var z int = int(f)
-	fmt.Println(x, y, z)
+	const World = "世界"
+	fmt.Println("Hello", World)
+	fmt.Println("Happy", Pi, "Day")
+
+	const Truth = true
+	fmt.Println("Go rules?", Truth)
 }
