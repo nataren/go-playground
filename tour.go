@@ -2,26 +2,28 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"time"
 )
 
-type Reader interface {
-	Read(b []byte) (n int, err error)
+type MyError struct {
+	When time.Time
+	What string
 }
 
-type Writer interface {
-	Write(b []byte) (n int, err error)
+func (e *MyError) Error() string {
+	return fmt.Sprintf("at %v, %s",
+		e.When, e.What)
 }
 
-type ReadWriter interface {
-	Reader
-	Writer
+func run() error {
+	return &MyError {
+		time.Now(),
+		"it didn't work",
+	}
 }
 
 func main() {
-	var w Writer
-	w = os.Stdout
-	fmt.Fprintf(w, "Hello, writer\n")
+	if err := run(); err != nil {
+		fmt.Println(err)
+	}
 }
-
-
