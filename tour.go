@@ -1,53 +1,17 @@
-package main
+package main 
 
 import (
 	"fmt"
-	"math"
+	"net/http"
 )
 
-type ErrNegativeSqrt float64
+type Hello struct { }
 
-func (e ErrNegativeSqrt) Error() string {
-	return fmt.Sprintf("Cannot Sqrt negative number: %v", float64(e))
-}
-
-func MySqrt(x float64) (float64, error) {
-	if x <= 0 {
-		return 0, ErrNegativeSqrt(x)
-	}
-	return SqrtIter(1.0, x), nil
-}
-
-func SqrtIter(guess, x float64) float64 {
-	for GoodEnough(guess, x) != true {
-		guess = Improve(guess, x)
-	}
-	return guess
-}
-
-func GoodEnough(guess, x float64) bool {
-	return math.Abs(math.Pow(guess, 2) - x) < 0.001
-}
-
-func Improve(guess, x float64) float64 {
-	return Average(guess, x / guess)
-}
-
-func Average(x, y float64) float64 {
-	return (x + y) / 2
+func (h Hello) ServeHTTP(w http.ResponseWriter,	r *http.Request) {
+	fmt.Fprint(w, "The request: ", r)
 }
 
 func main() {
-	sqrtOfThree, err := MySqrt(3)
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("MySqrt: ", sqrtOfThree)
-	}
-	sqrtOfMinusOne, err2 := MySqrt(-3)
-	if err2 != nil {
-		fmt.Println(err2)
-	} else {
-		fmt.Println("math.Sqrt: ", sqrtOfMinusOne)
-	}
+	var h Hello
+	http.ListenAndServe("localhost:4040", h)
 }
