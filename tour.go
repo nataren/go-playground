@@ -1,9 +1,10 @@
 package main
 
-import "fmt"
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
-	fmt.Printf("Now you have %g problems.",
-		math.Nextafter(2, 3))
+	fmt.Println(math.Pi)
 }
